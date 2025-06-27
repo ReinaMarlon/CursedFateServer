@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const { WebSocketServer } = require('ws');
 const crypto = require('crypto');
-
+// New try to make it work
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
