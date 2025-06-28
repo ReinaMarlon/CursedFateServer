@@ -1,11 +1,12 @@
 import express from 'express';
-import db from '../../db.js'; 
+import db from '../../db.js';
 
 const router = express.Router();
 
 router.get('/api/config/', async (req, res) => {
   try {
-    const [rows] = await db.execute("SELECT CurrentVersion, maxPlayersPerRoom, DeploymentType FROM configs LIMIT 1");
+    const [rows] = await db.execute(`
+      SELECT CurrentVersion, maxPlayersPerRoom, DeploymentType FROM configs LIMIT 1`);
 
     if (rows.length > 0) {
       res.json({ Config: rows[0] });
@@ -17,4 +18,5 @@ router.get('/api/config/', async (req, res) => {
     res.status(500).json({ error: "Error en el servidor" });
   }
 });
+
 export default router;
