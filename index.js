@@ -49,17 +49,11 @@ wss.on('connection', (ws) => {
   console.log("📡 Nuevo WebSocket conectado");
 
   ws.on('message', (message) => {
-    console.log("📩 Mensaje RAW:", message.toString()); // Asegúrate de convertir a string
-    const connectionTimeout = setTimeout(() => {
-      if (!ws.cfgame_id) {
-          console.log("⌛ Timeout: Conexión no identificada");
-          ws.close();
-      }
-  }, 5000);
+    console.log("📩 Mensaje RAW:", message.toString());
+
     try {
       const data = JSON.parse(message.toString());
 
-      // Mensaje de identificación
       if (data.type === 'identify') {
         if (!data.cfgame_id || !data.room_code) {
           throw new Error('Faltan campos requeridos');
@@ -67,15 +61,12 @@ wss.on('connection', (ws) => {
 
         console.log(`🎯 Identificando cliente ${data.cfgame_id} en sala ${data.room_code}`);
 
-        // Asignar identificadores
         ws.cfgame_id = data.cfgame_id;
         ws.room_code = data.room_code;
 
-        // Registrar en las estructuras de datos
         clients.set(data.cfgame_id, ws);
         addPlayerToRoom(data.room_code, data.cfgame_id);
 
-        // Respuesta de confirmación
         ws.send(JSON.stringify({
           type: 'connection_ack',
           status: 'success',
@@ -85,17 +76,16 @@ wss.on('connection', (ws) => {
           keepalive: true
         }));
 
-        // Notificar a otros jugadores
         broadcastToRoom(data.room_code, clients, {
           type: 'player_joined',
           cfgame_id: data.cfgame_id,
           timestamp: Date.now()
         });
-
-        return;
+      } else if (data.type === 'greeting') {
+        console.log(`🤝 Mensaje de saludo: ${data.content}`);
+        // puedes responder si quieres
+        ws.send(JSON.stringify({ type: "ack", message: "Hola Unity!" }));
       }
-
-      // Otros tipos de mensajes...
 
     } catch (err) {
       console.error("❌ Error procesando mensaje:", err);
@@ -108,19 +98,18 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     if (ws.cfgame_id && ws.room_code) {
-      // Notificar que el jugador se fue ANTES de eliminarlo
       broadcastToRoom(ws.room_code, clients, {
         type: "player_left",
         cfgame_id: ws.cfgame_id,
         timestamp: Date.now()
       });
 
-      // Luego limpiar los datos
       clients.delete(ws.cfgame_id);
       removePlayerFromRooms(ws.cfgame_id);
     }
   });
 });
+
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
