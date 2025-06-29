@@ -12,6 +12,7 @@ import currentConfigs from './game/config/currentConfigs.js';
 import createRoomRoute from './game/room/create.js';
 import joinRoomRoute from './game/room/joinRoom.js';
 import getPlayersRoom from './game/room/getPlayersRoom.js';
+import mailRoutes from './game/mails/allMails.js';
 import {
   addPlayerToRoom,
   broadcastToRoom,
@@ -43,6 +44,7 @@ app.use(currentConfigs);
 app.use(createRoomRoute);
 app.use(joinRoomRoute);
 app.use(getPlayersRoom);
+app.use(mailRoutes);
 
 // WebSocket handling
 wss.on('connection', (ws) => {
