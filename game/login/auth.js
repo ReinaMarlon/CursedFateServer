@@ -103,7 +103,7 @@ router.post('/api/auth', async (req, res) => {
           ssrPity: pdata.SSRPity || 0,
           ssrw: pdata.SSRW || 0,
           srw: pdata.SRW || 0,
-          pictureProfile: pdata.PictureProfile || 0
+          pictureProfile: pdata.PictureProfile || "UsefulPack/CursedFate_DefaultUserIcon"
         });
       } else {
         return res.json({ status: 'error', message: 'Usuario no encontrado' });
