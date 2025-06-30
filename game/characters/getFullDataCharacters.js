@@ -8,11 +8,11 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
       SELECT 
         c.id, c.name, c.health, c.attack, c.defense, c.picture, c.closePic,
         fd.fullname, fd.age, fd.description, fd.birthday,
-        fd.galleryPic, fd.fullbodyPic, fd.splashArt fd.fragments, fd.gunInfo
+        fd.galleryPic, fd.fullbodyPic, fd.splashArt, fd.fragments, fd.gunInfo
       FROM characters c
       JOIN characters_fulldata fd ON fd.id_character = c.id
     `);
-
+//really..
     const result = rows.map(row => ({
       id: row.id,
       name: row.name,
