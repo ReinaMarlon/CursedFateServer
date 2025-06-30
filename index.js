@@ -13,6 +13,7 @@ import createRoomRoute from './game/room/create.js';
 import joinRoomRoute from './game/room/joinRoom.js';
 import getPlayersRoom from './game/room/getPlayersRoom.js';
 import mailRoutes from './game/mails/allMails.js';
+import allCharacterData from './game/characters/getFullDataCharacters.js';
 import {
   addPlayerToRoom,
   broadcastToRoom,
@@ -45,6 +46,7 @@ app.use(createRoomRoute);
 app.use(joinRoomRoute);
 app.use(getPlayersRoom);
 app.use(mailRoutes);
+app.use(allCharacterData);
 
 // WebSocket handling
 wss.on('connection', (ws) => {
