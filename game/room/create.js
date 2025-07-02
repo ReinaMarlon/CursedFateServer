@@ -57,6 +57,7 @@ router.post('/api/room/create', async (req, res) => {
             message: 'Sala creada exitosamente',
             room_code: code
         });
+        
     } catch (err) {
         console.error("❌ Error al crear sala:", err);
         return res.status(500).json({ status: 'error', message: 'Error interno del servidor' });

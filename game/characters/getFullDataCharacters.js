@@ -20,7 +20,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
     try {
         const [rows] = await db.query(`
         SELECT 
-            c.id, c.name, c.health, c.attack, c.defense, c.picture, c.closePic,
+            c.id, c.name, c.health, c.attack, c.speed, c.defense, c.picture, c.closePic,
             fd.fullname, fd.age, fd.description, fd.birthday,
             fd.galleryPic, fd.fullbodyPic, fd.splashArt,
             fd.fragments, fd.gunInfo,
@@ -39,6 +39,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             name: row.name,
             health: row.health,
             attack: row.attack,
+            speed: row.speed,
             defense: row.defense,
             picture: row.picture,
             closePic: row.closePic,
