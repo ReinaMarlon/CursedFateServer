@@ -23,17 +23,18 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             c.id, c.name, c.health, c.attack, c.speed, c.defense, c.picture, c.closePic,
             fd.fullname, fd.age, fd.description, fd.birthday,
             fd.galleryPic, fd.fullbodyPic, fd.splashArt,
-            fd.fragments, fd.gunInfo,
+            fd.fragments,
             pfc.level, pfc.customStats, pfc.unlockedFragments, 
-            pfc.equippedGun, pfc.lastUsed, pfc.isFavorite,
-            g.name AS gunName, g.mytem_id AS gunMytemID, g.stats AS gunStats, g.history AS gunHistory
+            pfc.lastUsed, pfc.isFavorite,
+            g.name AS gunName, g.mytem_id AS gunMytemID, g.stats AS gunStats, g.history AS gunHistory,
+            m.name AS mytemName, m.history AS mytemHistory
         FROM characters c
         JOIN characters_fulldata fd ON fd.id_character = c.id
         LEFT JOIN player_fulldata_characters pfc ON pfc.character_id = c.id AND pfc.player_id = ?
-        LEFT JOIN guns g ON g.id = pfc.equippedGun
+        LEFT JOIN guns g ON g.id = pfc.gun_id
+        LEFT JOIN mytem m ON m.id = g.mytem_id
         `, [playerId]);
 
-        //really..
         const result = rows.map(row => ({
             id: row.id,
             name: row.name,
@@ -43,7 +44,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             defense: row.defense,
             picture: row.picture,
             closePic: row.closePic,
-          
+
             fullname: row.fullname,
             age: row.age,
             description: row.description,
@@ -51,28 +52,25 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             galleryPic: row.galleryPic,
             fullbodyPic: row.fullbodyPic,
             splashArt: row.splashArt,
-          
-            fragments: safeParseJson(row.fragments || '[]'),
-            gunInfo: safeParseJson(row.gunInfo || '{}'),
-          
-            // Datos del jugador
-            playerData: {
-              level: row.level ?? 1,
-              customStats: safeParseJson(row.customStats || '{}'),
-              unlockedFragments: safeParseJson(row.unlockedFragments || '[]'),
-              equippedGun: row.equippedGun,
-              lastUsed: row.lastUsed,
-              isFavorite: !!row.isFavorite,
-              equippedGunData: row.equippedGun ? {
-                name: row.gunName,
-                mytemId: row.gunMytemID,
-                stats: safeParseJson(row.gunStats || '{}'),
-                history: row.gunHistory
-              } : null
-            }
-          }));
-          
 
+            fragments: safeParseJson(row.fragments || '[]'),
+
+            playerData: {
+                level: row.level ?? 1,
+                customStats: safeParseJson(row.customStats || '{}'),
+                unlockedFragments: safeParseJson(row.unlockedFragments || '[]'),
+                lastUsed: row.lastUsed,
+                isFavorite: !!row.isFavorite,
+                equippedGunData: row.gunName ? {
+                    name: row.gunName,
+                    mytemId: row.gunMytemID,
+                    stats: safeParseJson(row.gunStats || '{}'),
+                    history: row.gunHistory,
+                    mytemName: row.mytemName,
+                    mytemDesc: row.mytemHistory
+                } : null
+            }
+        }));
 
         res.json(result);
     } catch (err) {
@@ -80,5 +78,6 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
 
 export default allCharacterData;
