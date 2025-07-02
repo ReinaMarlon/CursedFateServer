@@ -64,7 +64,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
               isFavorite: !!row.isFavorite,
               equippedGunData: row.equippedGun ? {
                 name: row.gunName,
-                mytem: row.gunMytem,
+                mytemId: row.gunMytemID,
                 stats: JSON.parse(row.gunStats || '{}'),
                 history: row.gunHistory
               } : null
