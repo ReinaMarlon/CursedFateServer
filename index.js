@@ -15,6 +15,7 @@ import getPlayersRoom from './game/room/getPlayersRoom.js';
 import mailRoutes from './game/mails/allMails.js';
 import allCharacterData from './game/characters/getFullDataCharacters.js';
 import gunsRouter from './game/inventory/gunsAndMytems.js';
+import shopDataRouter from './game/shop/shopData.js';
 import {
   addPlayerToRoom,
   broadcastToRoom,
@@ -49,6 +50,7 @@ app.use(getPlayersRoom);
 app.use(mailRoutes);
 app.use(allCharacterData);
 app.use(gunsRouter);
+app.use(shopDataRouter);
 
 // WebSocket handling
 wss.on('connection', (ws) => {
