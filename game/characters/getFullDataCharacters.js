@@ -27,7 +27,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             pfc.level, pfc.customStats, pfc.unlockedFragments, 
             pfc.lastUsed, pfc.isFavorite,
             g.name AS gunName, g.mytem_id AS gunMytemID, g.stats AS gunStats, g.history AS gunHistory,
-            m.name AS mytemName, m.history AS mytemHistory
+            m.nombre AS mytemName
         FROM characters c
         JOIN characters_fulldata fd ON fd.id_character = c.id
         LEFT JOIN player_fulldata_characters pfc ON pfc.character_id = c.id AND pfc.player_id = ?

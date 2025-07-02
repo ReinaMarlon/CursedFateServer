@@ -2,7 +2,7 @@ import express from 'express';
 import db from '../../db.js';
 const gunsRouter = express.Router();
 
-gunsRouter.get('/api/guns-and-mytems', async (req, res) => {
+gunsRouter.get('/api/inventory/guns-and-mytems', async (req, res) => {
     try {
         const [guns] = await db.query(`SELECT * FROM guns`);
         const [mytems] = await db.query(`SELECT * FROM mytem`);
