@@ -42,6 +42,8 @@ app.get('/', (req, res) => {
 
 // Montar ruta de configuración
 // app.use('/api/config', currentConfigs);
+app.use('/ExternalResources', express.static(path.join(__dirname, 'ExternalResources')));
+
 app.use(auth);
 app.use(currentConfigs);
 app.use(createRoomRoute);
