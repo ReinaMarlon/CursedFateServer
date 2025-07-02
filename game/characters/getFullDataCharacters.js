@@ -29,7 +29,7 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             g.name AS gunName, g.mytem AS gunMytem, g.stats AS gunStats, g.history AS gunHistory
         FROM characters c
         JOIN characters_fulldata fd ON fd.id_character = c.id
-        LEFT JOIN player_fulldata_character pfc ON pfc.character_id = c.id AND pfc.player_id = ?
+        LEFT JOIN player_fulldata_characters pfc ON pfc.character_id = c.id AND pfc.player_id = ?
         LEFT JOIN guns g ON g.id = pfc.equippedGun
         `, [playerId]);
 
