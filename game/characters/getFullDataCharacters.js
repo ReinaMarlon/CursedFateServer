@@ -51,21 +51,21 @@ allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
             fullbodyPic: row.fullbodyPic,
             splashArt: row.splashArt,
           
-            fragments: JSON.parse(row.fragments || '[]'),
-            gunInfo: JSON.parse(row.gunInfo || '{}'),
+            fragments: safeParseJson(row.fragments || '[]'),
+            gunInfo: safeParseJson(row.gunInfo || '{}'),
           
             // Datos del jugador
             playerData: {
               level: row.level ?? 1,
-              customStats: JSON.parse(row.customStats || '{}'),
-              unlockedFragments: JSON.parse(row.unlockedFragments || '[]'),
+              customStats: safeParseJson(row.customStats || '{}'),
+              unlockedFragments: safeParseJson(row.unlockedFragments || '[]'),
               equippedGun: row.equippedGun,
               lastUsed: row.lastUsed,
               isFavorite: !!row.isFavorite,
               equippedGunData: row.equippedGun ? {
                 name: row.gunName,
                 mytemId: row.gunMytemID,
-                stats: JSON.parse(row.gunStats || '{}'),
+                stats: safeParseJson(row.gunStats || '{}'),
                 history: row.gunHistory
               } : null
             }
