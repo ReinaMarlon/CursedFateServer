@@ -16,6 +16,7 @@ function safeParseJson(input) {
 }
 
 allCharacterData.get('/api/characters/fulldata/', async (req, res) => {
+    const playerId = req.query.player_id; 
     try {
         const [rows] = await db.query(`
         SELECT 
