@@ -29,5 +29,5 @@ public class UserEntity {
     private List<UserCharacterEntity> characters = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<MatchHistoryEntity> matchHistory;
+    private List<MatchHistoryEntity> matchHistory = new ArrayList<>();
 }

@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 @Entity
 public class UserCharacterEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long characterId;
+
     private Long level;
     private Long atk;
     private Long spd;

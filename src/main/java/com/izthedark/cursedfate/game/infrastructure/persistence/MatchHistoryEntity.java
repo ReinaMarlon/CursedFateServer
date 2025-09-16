@@ -8,7 +8,9 @@ import java.util.List;
 @Entity
 public class MatchHistoryEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long matchId;
     private int score;
     private Long coinsEarned;
