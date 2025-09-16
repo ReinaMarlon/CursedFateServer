@@ -1,5 +1,6 @@
 package com.izthedark.cursedfate.user.infrastructure.persistence;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.izthedark.cursedfate.game.infrastructure.persistence.MatchHistoryEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,8 +27,10 @@ public class UserEntity {
     private Long coins;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<UserCharacterEntity> characters = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<MatchHistoryEntity> matchHistory = new ArrayList<>();
 }
