@@ -19,7 +19,7 @@ public class AuthController {
     public ResponseEntity<AuthToken> login(@RequestBody Credentials credentials) {
         System.out.println("Email recibido: '" + credentials.getEmail() + "'");
         System.out.println("Password recibido: '" + credentials.getPassword() + "'");
-        return ResponseEntity.ok(authService.login(credentials.toDomain()));
+        return ResponseEntity.ok(authService.login(credentials));
     }
 
     @PostMapping("/register")
