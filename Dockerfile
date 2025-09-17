@@ -1,14 +1,14 @@
-# Usa una imagen base con Java 17
-FROM eclipse-temurin:17-jdk
-
-# Crea el directorio de trabajo dentro del contenedor
+# Etapa 1: Build con Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copia el .jar generado en target/
-COPY target/*.jar app.jar
+# Etapa 2: Imagen final con solo el JAR
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Expone el puerto que Railway asigna en runtime
 EXPOSE $PORT
-
-# Arranca la app leyendo la variable $PORT
 CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
