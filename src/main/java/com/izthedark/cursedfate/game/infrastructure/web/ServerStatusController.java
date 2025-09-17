@@ -9,4 +9,5 @@ public class ServerStatusController {
     public String health() {
         return "App is running!";
     }
+    //To test the status of app.
 }
