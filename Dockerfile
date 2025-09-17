@@ -1,0 +1,1 @@
+CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
