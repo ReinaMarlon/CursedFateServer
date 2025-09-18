@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CursedfateApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CursedfateApplication.class, args);
+        System.out.println(">>> ENV PORT = " + System.getenv("PORT"));
+        SpringApplication.run(CursedfateApplication.class, args);
 	}
 
 }
