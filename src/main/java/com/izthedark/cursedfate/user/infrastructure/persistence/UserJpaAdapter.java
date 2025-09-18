@@ -33,7 +33,7 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort {
     @Override
     public User save(Register register) {
         UserEntity entity = new UserEntity();
-        entity.setUsername(register.getEmail().split("@")[0]);
+        entity.setUsername(register.getUsername());
         entity.setEmail(register.getEmail());
         entity.setPassword(register.getPassword());
         entity.setLevel(1L);
