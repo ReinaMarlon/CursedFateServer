@@ -7,5 +7,4 @@ import lombok.*;
 public class Credentials {
     private String email;
     private String password;
-    private Origin origin;
 }

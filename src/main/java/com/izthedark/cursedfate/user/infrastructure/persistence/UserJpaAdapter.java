@@ -2,6 +2,7 @@ package com.izthedark.cursedfate.user.infrastructure.persistence;
 
 
 import com.izthedark.cursedfate.auth.application.dto.Credentials;
+import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.domain.ports.out.LoadUserPort;
 import com.izthedark.cursedfate.auth.domain.ports.out.SaveUserPort;
 import com.izthedark.cursedfate.user.domain.model.User;
@@ -30,11 +31,11 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort {
     }
 
     @Override
-    public User save(Credentials credentials) {
+    public User save(Register register) {
         UserEntity entity = new UserEntity();
-        entity.setUsername(credentials.getEmail().split("@")[0]);
-        entity.setEmail(credentials.getEmail());
-        entity.setPassword(credentials.getPassword());
+        entity.setUsername(register.getEmail().split("@")[0]);
+        entity.setEmail(register.getEmail());
+        entity.setPassword(register.getPassword());
         entity.setLevel(1L);
         entity.setCoins(0L);
 

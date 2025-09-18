@@ -1,5 +1,6 @@
 package com.izthedark.cursedfate.auth.application.services;
 
+import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.domain.model.AuthToken;
 import com.izthedark.cursedfate.auth.application.dto.Credentials;
 import com.izthedark.cursedfate.auth.domain.ports.in.UserLoginUseCase;
@@ -40,9 +41,9 @@ public class AuthService implements UserLoginUseCase, UserRegisterUseCase {
     }
 
     @Override
-    public AuthToken register(Credentials credentials) {
+    public AuthToken register(Register register) {
         UserEntity entity = new UserEntity();
-        var newUser = saveUserPort.save(credentials);
+        var newUser = saveUserPort.save(register);
         return tokenProviderPort.generateToken(newUser);
     }
 }

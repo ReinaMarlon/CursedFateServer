@@ -1,6 +1,7 @@
 package com.izthedark.cursedfate.auth.infrastructure.web.controller;
 
 import com.izthedark.cursedfate.auth.application.dto.Credentials;
+import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.application.services.AuthService;
 import com.izthedark.cursedfate.auth.domain.model.AuthToken;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthToken> register(@RequestBody Credentials credentials) {
-        return ResponseEntity.ok(authService.register(credentials));
+    public ResponseEntity<AuthToken> register(@RequestBody Register register) {
+        return ResponseEntity.ok(authService.register(register));
     }
 }
