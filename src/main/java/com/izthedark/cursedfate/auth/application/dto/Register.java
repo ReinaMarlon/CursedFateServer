@@ -15,4 +15,5 @@ public class Register {
     private String email;
     private String password;
     private Origin origin;
+    private String sessionId;
 }
