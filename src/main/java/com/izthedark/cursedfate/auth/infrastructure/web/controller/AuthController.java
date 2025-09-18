@@ -24,6 +24,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthToken> register(@RequestBody Credentials credentials) {
-        return ResponseEntity.ok(authService.register(credentials.toDomain()));
+        return ResponseEntity.ok(authService.register(credentials));
     }
 }
