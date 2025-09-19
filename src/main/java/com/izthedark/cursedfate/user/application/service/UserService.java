@@ -1,5 +1,6 @@
 package com.izthedark.cursedfate.user.application.service;
 
+import com.izthedark.cursedfate.user.application.dto.UserToApp;
 import com.izthedark.cursedfate.user.domain.model.User;
 import com.izthedark.cursedfate.user.domain.ports.out.UserGetDataPort;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class UserService {
         this.UserGetDataPort = UserGetDataPort;
     }
 
-    public Optional<User> loadUserByToken(String token) {
+    public Optional<UserToApp> loadUserByToken(String token) {
         return UserGetDataPort.loadUserByToken(token);
     }
 }

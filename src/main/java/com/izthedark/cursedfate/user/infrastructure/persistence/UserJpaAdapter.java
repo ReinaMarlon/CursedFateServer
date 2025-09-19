@@ -1,10 +1,10 @@
 package com.izthedark.cursedfate.user.infrastructure.persistence;
 
 
-import com.izthedark.cursedfate.auth.application.dto.Credentials;
 import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.domain.ports.out.LoadUserPort;
 import com.izthedark.cursedfate.auth.domain.ports.out.SaveUserPort;
+import com.izthedark.cursedfate.user.application.dto.UserToApp;
 import com.izthedark.cursedfate.user.domain.model.User;
 import com.izthedark.cursedfate.user.domain.ports.out.UserGetDataPort;
 import lombok.*;
@@ -63,16 +63,15 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPo
     }
 
     @Override
-    public Optional<User> loadUserByToken(String token) {
+    public Optional<UserToApp> loadUserByToken(String token) {
         return repository.findByToken(token)
-                .map(entity -> new User(
+                .map(entity -> new UserToApp(
                         entity.getId(),
                         entity.getUsername(),
                         entity.getEmail(),
-                        entity.getPassword(),
                         entity.getLevel(),
                         entity.getCoins(),
-                        entity.getToken()
+                        entity.getCharacters()
                 ));
     }
 

@@ -1,6 +1,7 @@
 package com.izthedark.cursedfate.user.infrastructure.web.controller;
 
 import com.izthedark.cursedfate.game.application.service.GameService;
+import com.izthedark.cursedfate.user.application.dto.UserToApp;
 import com.izthedark.cursedfate.user.application.service.UserService;
 import com.izthedark.cursedfate.user.domain.model.User;
 import com.izthedark.cursedfate.user.infrastructure.persistence.UserEntity;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserData")
-    public ResponseEntity<User> getUserData(@RequestParam String token) {
+    public ResponseEntity<UserToApp> getUserData(@RequestParam String token) {
         return userService.loadUserByToken(token)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
