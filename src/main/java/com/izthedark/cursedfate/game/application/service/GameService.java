@@ -14,10 +14,10 @@ public class GameService {
     @Value("${GAME_VERSION:1.0.0}")
     private String gameVersion;
 
-    @Value("${GAME_STATUS:UP}")
+    @Value("${GAME_STATUS:ON}")
     private String gameStatus;
 
-    private LoadGameServerDataPort loadGameServerDataPort;
+    private final LoadGameServerDataPort loadGameServerDataPort;
 
     public GameService(LoadGameServerDataPort loadGameServerDataPort) {
         this.loadGameServerDataPort = loadGameServerDataPort;
