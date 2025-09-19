@@ -6,6 +6,7 @@ import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.domain.ports.out.LoadUserPort;
 import com.izthedark.cursedfate.auth.domain.ports.out.SaveUserPort;
 import com.izthedark.cursedfate.user.domain.model.User;
+import com.izthedark.cursedfate.user.domain.ports.out.UserGetDataPort;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class UserJpaAdapter implements LoadUserPort, SaveUserPort {
+public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPort {
 
     private final UserJpaRepository repository;
 
@@ -26,7 +27,8 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort {
                         entity.getEmail(),
                         entity.getPassword(),
                         entity.getLevel(),
-                        entity.getCoins()
+                        entity.getCoins(),
+                        entity.getToken()
                 ));
     }
 
@@ -47,8 +49,31 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort {
                 saved.getEmail(),
                 saved.getPassword(),
                 saved.getLevel(),
-                saved.getCoins()
+                saved.getCoins(),
+                saved.getToken()
         );
+    }
+
+    @Override
+    public void updateToken(Long userId, String token) {
+        repository.findById(userId).ifPresent(entity -> {
+            entity.setToken(token);
+            repository.save(entity);
+        });
+    }
+
+    @Override
+    public Optional<User> loadUserByToken(String token) {
+        return repository.findByToken(token)
+                .map(entity -> new User(
+                        entity.getId(),
+                        entity.getUsername(),
+                        entity.getEmail(),
+                        entity.getPassword(),
+                        entity.getLevel(),
+                        entity.getCoins(),
+                        entity.getToken()
+                ));
     }
 
 }

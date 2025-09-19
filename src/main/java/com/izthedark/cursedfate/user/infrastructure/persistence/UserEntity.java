@@ -33,4 +33,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<MatchHistoryEntity> matchHistory = new ArrayList<>();
+
+    private String token;
 }

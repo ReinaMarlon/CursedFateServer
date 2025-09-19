@@ -31,13 +31,15 @@ public class AuthService implements UserLoginUseCase, UserRegisterUseCase {
         var user = loadUserPort.loadUserByEmail(credentials.getEmail())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid credentials"));
 
-        System.out.println("Password en BD: '" + user.getPassword() + "'");
-        System.out.println("Password recibido: '" + credentials.getPassword() + "'");
-
         if (!user.getPassword().equals(credentials.getPassword())) throw new InvalidCredentialsException("Password missmatch!");
 
 
-        return tokenProviderPort.generateToken(user);
+        AuthToken authToken = tokenProviderPort.generateToken(user);
+
+        ((SaveUserPort) saveUserPort).updateToken(user.getId(), authToken.getToken());
+
+        return authToken;
+    
     }
 
     @Override

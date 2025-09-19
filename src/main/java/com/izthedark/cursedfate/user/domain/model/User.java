@@ -18,7 +18,9 @@ public class User {
     private List<UserCharacter> characters;
     private List<MatchHistory> matchHistory;
 
-    public User(Long id, String username, String email, String password, Long level, Long coins) {
+    private String temporalToken;
+
+    public User(Long id, String username, String email, String password, Long level, Long coins, String token) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -27,5 +29,6 @@ public class User {
         this.coins = coins;
         this.characters = new ArrayList<>();
         this.matchHistory = new ArrayList<>();
+        this.temporalToken = token;
     }
 }

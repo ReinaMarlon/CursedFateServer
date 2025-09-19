@@ -5,4 +5,5 @@ import com.izthedark.cursedfate.user.domain.model.User;
 
 public interface SaveUserPort {
     User save(Register register);
+    void updateToken(Long userId, String token);
 }
