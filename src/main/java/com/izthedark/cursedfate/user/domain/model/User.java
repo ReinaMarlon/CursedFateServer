@@ -14,13 +14,14 @@ public class User {
     private String password;
     private Long level;
     private Long coins;
+    private String profilePicture;
 
     private List<UserCharacter> characters;
     private List<MatchHistory> matchHistory;
 
     private String temporalToken;
 
-    public User(Long id, String username, String email, String password, Long level, Long coins, String token) {
+    public User(Long id, String username, String email, String password, Long level, Long coins, String token, String profilePicture) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -30,5 +31,6 @@ public class User {
         this.characters = new ArrayList<>();
         this.matchHistory = new ArrayList<>();
         this.temporalToken = token;
+        this.profilePicture = profilePicture;
     }
 }

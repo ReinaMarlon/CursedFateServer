@@ -26,6 +26,8 @@ public class UserEntity {
     private Long level;
     private Long coins;
 
+    private String profilePicture;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<UserCharacterEntity> characters = new ArrayList<>();

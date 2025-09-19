@@ -28,6 +28,7 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPo
                         entity.getPassword(),
                         entity.getLevel(),
                         entity.getCoins(),
+                        entity.getProfilePicture(),
                         entity.getToken()
                 ));
     }
@@ -50,6 +51,7 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPo
                 saved.getPassword(),
                 saved.getLevel(),
                 saved.getCoins(),
+                saved.getProfilePicture(),
                 saved.getToken()
         );
     }
@@ -71,6 +73,7 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPo
                         entity.getEmail(),
                         entity.getLevel(),
                         entity.getCoins(),
+                        entity.getProfilePicture(),
                         entity.getCharacters()
                 ));
     }

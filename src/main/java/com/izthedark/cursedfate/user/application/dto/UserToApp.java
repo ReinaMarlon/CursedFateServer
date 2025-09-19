@@ -18,6 +18,7 @@ public class UserToApp {
     private String email;
     private Long level;
     private Long coins;
+    private String profilePicture;
     private List<UserCharacterEntity> characters;
 
 }
