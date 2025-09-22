@@ -4,6 +4,7 @@ package com.izthedark.cursedfate.user.infrastructure.persistence;
 import com.izthedark.cursedfate.auth.application.dto.Register;
 import com.izthedark.cursedfate.auth.domain.ports.out.LoadUserPort;
 import com.izthedark.cursedfate.auth.domain.ports.out.SaveUserPort;
+import com.izthedark.cursedfate.character.application.dto.UserCharacterDTO;
 import com.izthedark.cursedfate.user.application.dto.UserToApp;
 import com.izthedark.cursedfate.user.domain.model.User;
 import com.izthedark.cursedfate.user.domain.ports.out.UserGetDataPort;
@@ -11,6 +12,7 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -74,7 +76,10 @@ public class UserJpaAdapter implements LoadUserPort, SaveUserPort, UserGetDataPo
                         entity.getLevel(),
                         entity.getCoins(),
                         entity.getProfilePicture(),
-                        entity.getCharacters()
+                        entity.getCharacters().stream()
+                                .map(userCharEntity -> userCharEntity.toDomain())
+                                .map(UserCharacterDTO::new)
+                                .collect(Collectors.toList())
                 ));
     }
 

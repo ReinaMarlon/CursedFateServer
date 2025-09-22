@@ -31,11 +31,9 @@ public class UserEntity {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private List<UserCharacterEntity> characters = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<MatchHistoryEntity> matchHistory = new ArrayList<>();
 
     private String token;
