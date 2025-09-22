@@ -12,4 +12,7 @@ public class Character {
     private Long spd;
     private Long hp;
     private Long def;
+    private String description;
+    private String closePic;
+    private String fullPic;
 }

@@ -1,6 +1,7 @@
 package com.izthedark.cursedfate.user.infrastructure.persistence;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.izthedark.cursedfate.character.infrastructure.persistence.UserCharacterEntity;
 import com.izthedark.cursedfate.game.infrastructure.persistence.MatchHistoryEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,7 +29,8 @@ public class UserEntity {
 
     private String profilePicture;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name = "user_id")
     @JsonManagedReference
     private List<UserCharacterEntity> characters = new ArrayList<>();
 

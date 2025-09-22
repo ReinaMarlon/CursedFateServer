@@ -1,6 +1,5 @@
-package com.izthedark.cursedfate.user.domain.model;
+package com.izthedark.cursedfate.character.domain.model;
 
-import com.izthedark.cursedfate.character.domain.model.Character;
 import lombok.*;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
@@ -13,4 +12,6 @@ public class UserCharacter {
     private Long spd;
     private Long hp;
     private Long def;
+    private String closePic;
+    private String fullPic;
 }

@@ -1,4 +1,8 @@
 package com.izthedark.cursedfate.character.infrastructure.persistence;
 
-public class CharacterJpaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CharacterJpaRepository extends JpaRepository<CharacterEntity, Long> {
 }

@@ -1,5 +1,6 @@
 package com.izthedark.cursedfate.user.domain.model;
 
+import com.izthedark.cursedfate.character.domain.model.UserCharacter;
 import com.izthedark.cursedfate.game.domain.model.MatchHistory;
 import lombok.*;
 
