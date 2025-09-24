@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/characters/v1")
 @RequiredArgsConstructor
 public class CharacterController {
-
+    //Test
     private final CharacterService characterService;
     private final UserCharacterService userCharacterService;
 
